@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
 
 static char *set_arg = "";
 static int  ignore_element = 0;
@@ -46,12 +47,38 @@ int main(int argc, char *argv[])
 
     for (int cou = 0; cou < argc; cou++)
     {
+        if (cou == 0)
+        {
+            continue;
+        }
         if (ignore_element_active == true)
         {
             if (cou == ignore_element)
             {
+                continue;
+            }
+        }
+
+        if (strcmp(set_arg, "-n") == 0)
+        {        
+            if (cou == argc)
+            {
                 break;
             }
+
+            printf("%s ", argv[cou]);
+        }
+        if (strcmp(set_arg, "-e") == 0)
+        {
+            continue;
+        }
+        if (strcmp(set_arg, "-E") == 0)
+        {
+            continue;
+        }
+        if (strcmp(set_arg, "none") == 0)
+        {
+            continue;
         }
     }
 
