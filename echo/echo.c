@@ -5,10 +5,12 @@
 static char *set_arg = "";
 static int  ignore_element = 0;
 static bool ignore_element_active = false;
+static char *e_sequences[6] = {"\\", "\\b", "\\n", "\\t"};
+static char *e_sequences_r[6] = {"\\", "\b", "\n", "\t"};
+
 
 int main(int argc, char *argv[])
 {
-
     for (int i = 0; i < argc; i++)
     {
             if (strcmp(argv[i], "-n") == 0)
@@ -70,11 +72,24 @@ int main(int argc, char *argv[])
         }
         if (strcmp(set_arg, "-e") == 0)
         {
-            continue;
+            for (int j = 0; j < (sizeof(e_sequences)/sizeof(e_sequences[0])); j++)
+            {
+                if (strcmp(argv[cou], e_sequences[j]) == 0)
+                {
+                    printf("%s", e_sequences_r[j]);
+                }
+            }
+
+            printf("%s", argv[cou]);
         }
         if (strcmp(set_arg, "-E") == 0)
         {
-            continue;
+            if (cou == argc)
+            {
+                printf("\n");
+            }
+
+            printf("%s ", argv[cou]);
         }
         if (strcmp(set_arg, "none") == 0)
         {
