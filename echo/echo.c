@@ -2,6 +2,8 @@
 #include <string.h>
 
 static char *set_arg = "";
+static int  ignore_element = 0;
+static bool ignore_element_active = false;
 
 int main(int argc, char *argv[])
 {
@@ -11,14 +13,20 @@ int main(int argc, char *argv[])
             if (strcmp(argv[i], "-n") == 0)
             {
                     set_arg = "-n";
+                    ignore_element = i;
+                    ignore_element_active = true;
             }
             if (strcmp(argv[i], "-e") == 0)
             {
                     set_arg = "-e";
+                    ignore_element = i;
+                    ignore_element_active = true;
             }
             if (strcmp(argv[i], "-E") == 0)
             {
                     set_arg = "-E";
+                    ignore_element = i;
+                    ignore_element_active = true;
             }
 
             if (i == argc-1)
@@ -36,7 +44,16 @@ int main(int argc, char *argv[])
             }
     }
 
-    printf("%s \n", set_arg);
+    for (int cou = 0; cou < argc; cou++)
+    {
+        if (ignore_element_active == true)
+        {
+            if (cou == ignore_element)
+            {
+                break;
+            }
+        }
+    }
 
     return 0;
 }
